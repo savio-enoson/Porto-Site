@@ -1,0 +1,199 @@
+{% load static %}
+<style>
+.method_container {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+    
+.method_vis {
+    width: min(100%, auto);
+    height: min(100%, auto);
+    max-height: 20em;
+    max-width: 30em;
+    margin-bottom: 1em;
+}
+    
+.heading_img img {
+    height: 75vh;
+    width: auto;
+}
+</style>
+
+<div class="row my-3">
+    <div class="col d-none d-md-block">
+        <div class="img_container heading_img px-3
+        d-flex justify-content-between flex-column flex-lg-row">
+            <img src="{% static 'Projects/DrivingSim/heading2.jpg' %}" alt="homepage">
+        </div>
+    </div>
+    <div class="col">
+        <h1>Genetic Algorithm Simulation</h1>
+        <h5>Self-Driving Cars with HTML and Javascript</h5>
+        <div class="tags">
+            <span class="badge">{{ project.date|date:'Y' }}</span>
+            <span class="badge highlight-green">{{ project.topics }}</span>
+            <span class="badge highlight-purple">{{ project.instance }}</span>
+        </div>
+        <br>
+        <p>
+            This was the final project for an Artificial Intelligence course. A simulation is made using HTML and Javascript,
+            drawn 2-Dimensionally using the canvas element and its methods. Each agent uses ray-casting to read its surroundings, 
+            which it then interprets using its own set of biases. 
+        </p>
+        <p>
+            Crossover and Mutation principles are then used to generate progressively smarter agents. The fitness function for this is a
+            combination of survivability and distance travelled, so faster moving agents are more successful. Agents are eliminated when
+            they are either left too far behind, or have hit a border.
+        </p>
+        <p>The skeleton for this project, which includes the visual elements and vehicle controls are taken from 
+        <a href="https://youtu.be/Rs_rAxEsAvI" target="_blank">this</a> tutorial. It is then modified with random road 
+        generation and a new "brain" for agents.</p>
+        
+        <a class="btn btn-outline-light" href="https://github.com/savio-enoson/Project_KA" target="_blank"><i class="bi bi-github"></i>&ensp;Source Code</a>
+    </div>
+</div>
+
+<hr>
+
+<h3 class="text-center">Content</h3>
+
+<div class="row my-3" onload="init_carousel('my_carousel')">
+    <div class="col-12 col-lg-6 method_container">
+        <img class="method_vis" src="{% static 'Projects/DrivingSim/method1.jpg' %}" alt="controls">
+        <div>
+            <h5>Controls</h5>
+            <p>Each agent/car has N (variable) sensors. These cast rays and return the coordinates as well as the offset of
+            objects hit by the ray. The number, spread, and length of these rays can be adjusted for each run or instance
+            of the simulation.</p>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 method_container">
+        <table class="table table-dark table-hover table-bordered border-light method_vis mx-auto">
+            <thead>
+                <tr>
+                    <th colspan="2">Chromosome</th>
+                    <th>Left</th>
+                    <th>Right</th>
+                    <th>Forward</th>
+                    <th>Reverse</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">Sensor 1</td>
+                    <td>0.3532</td>
+                    <td>0.9093</td>
+                    <td>0.1536</td>
+                    <td>0.5097</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Sensor 2</td>
+                    <td>0.9115</td>
+                    <td>0.6207</td>
+                    <td>0.1999</td>
+                    <td>0.2746</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Sensor 3</td>
+                    <td>0.5824</td>
+                    <td>0.0337</td>
+                    <td>0.6995</td>
+                    <td>0.6454</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Sensor 4</td>
+                    <td>0.7514</td>
+                    <td>0.2207</td>
+                    <td>0.4944</td>
+                    <td>0.9813</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Sensor N</td>
+                    <td>. . .</td>
+                    <td>. . .</td>
+                    <td>. . .</td>
+                    <td>. . .</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <h5>Brain / Chromosomes</h5>
+            <p>Each agent/car has N (variable) sensors. These cast rays and return the coordinates as well as the offset of
+            objects hit by the ray. Using their chromosomes, each agent will then determine the course of action (left, right, 
+            forward, reverse).</p>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 method_container">
+        <img class="method_vis" src="{% static 'Projects/DrivingSim/method2.png' %}" alt="fitness function">
+        <div class="text-center">
+            <h5>Fitness Function</h5>
+            <p>An agent's fitness function is represented by 2 processes. Each tick, the Euclidean distance from the last 
+            road segment to each agent is measured, and then the distance of each agent to the lead driver is measured to 
+            eliminate the slower drivers, while leaving some room for variation.</p>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 method_container">
+        <img class="method_vis" src="{% static 'Projects/DrivingSim/mutation.jpg' %}" alt="mutations">
+        <div class="text-center">
+            <h5>Crossover and Mutation</h5>
+            <p>For each generation, the fop scoring candidate is chosen and crossed over with the "winner" from the last generation. 
+            The crossed over chromosomes will then be put through uniform mutation with a certain factor, which determines the
+            variance of mutations that are possible.</p>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="row my-3">
+    <div class="col-sm-12 col-md-6 px-3">
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/DrivingSim/heading1.jpg' %}" alt="gameplay_1">
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <h3>Solution&ensp;<i class="bi bi-lightbulb-fill"></i></h3>
+
+        <p>
+            I had previously made the controls based on a YouTube tutorial. The logic uses a neural network to process inputs taken by casting ‘rays’ in several directions and reading the input (coordinates and offset from center).
+        </p>
+        <p>
+            I redesigned the system to decide which way to turn based on biases, in essence numbers that determine how the agent will process the information given to it. To smoothen the agent’s movement, I implemented several thresholds for turning (to avoid rough turns) and reversing (to avoid getting stuck in loops). 
+        </p>
+        <p>
+            I also randomized the road generation, making 8 road types which can all interconnect. The simulation can then be saved and re-run to get the desired results, with the best agent being saved (serialized into json) to be used as a baseline for mutation to start the next generation.
+        </p>
+   </div>
+</div>
+
+<div class="row mt-5">
+     <div class="col-sm-12 col-md-6 px-3">
+        <h3>Challenges&ensp;<i class="bi bi-bug-fill"></i></h3>
+        <p>
+            I was unfamiliar with drawing on the HTML canvas element, so implementing the road generation took some hours of trial and error to get things working properly.
+        </p>
+         <p>
+             Although implementing the genetic algorithm went as expected, it took a lot of testing to finally get an agent that can control itself smoothly.
+         </p>
+   </div>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <h3>Things I Learned&ensp;<i class="bi bi-bookmarks-fill"></i></h3>
+        <p>
+            Though the main focus was the genetic algorithm, truthfully the most useful part of this project to me was the practice it gave me on using OOP in Javascript and creating animations with the canvas element.
+        </p>
+        <p>
+            Both have been surprisingly useful in later projects–I suppose knowing what is possible allowed me to use solve problems in more creative ways than I otherwise would have.
+        </p>
+   </div>
+</div>
+
+<hr>
+
+<h3 class="text-center"><i class="bi bi-tools"></i> Demo Coming Soon! <i class="bi bi-tools"></i></h3>

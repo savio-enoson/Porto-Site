@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmark Button</title>
+    <style>
+        .bookmark-button {
+            display: inline-block;
+            position: relative;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .bookmark-button:hover {
+            background-color: #2980b9;
+            transform: scale(1.1);
+        }
+
+        .bookmark-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -20px; /* Adjust the size of the cutout */
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 20px 20px 20px 0;
+            border-color: transparent #3498db transparent transparent;
+            transition: border-width 0.3s;
+        }
+
+        .bookmark-button:hover::before {
+            border-width: 20px 22px 20px 0; /* Adjust the size of the cutout on hover */
+        }
+    </style>
+</head>
+<body>
+
+<button class="bookmark-button" style="margin-left: 100px">Bookmark</button>
+
+</body>
+</html>

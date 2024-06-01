@@ -1,0 +1,163 @@
+:root {
+    --dark-color: #131313;
+    --primary-color: #1F1F1F;
+    --secondary-color: #1a1a1a;
+    --bg-dots-color: #3f3f3f;
+    --text-color: #e3e3e3;
+    --light-primary-color: #eeeeee;
+    --highlight-color: dodgerblue;
+    --dark-highlight-color: #26547C;
+    --font-size: 15px;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('../fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype')
+}
+
+body {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-color);
+    font-size: var(--font-size);
+    font-weight: lighter;
+    background-color: var(--dark-color);
+
+    z-index: -1;
+}
+
+#root, #root_temp {
+    background: var(--primary-color)
+    radial-gradient(var(--bg-dots-color) 5%, transparent 0%);
+    background-size: 45px 45px;
+
+    position: absolute;
+    z-index: 5;
+    overflow-x: hidden;
+
+    transition: 500ms;
+
+    padding-left: max(1em, 5vw);
+    padding-right: max(1em, 5vw);
+}
+
+#root_temp {
+    z-index: 4;
+    background: var(--secondary-color)
+    radial-gradient(var(--bg-dots-color) 5%, transparent 0%);
+    background-size: 45px 45px;
+
+    display: none;
+    height: 100vh;
+    width: 100%;
+}
+
+.highlight-green {
+    --highlight-color: #208028;
+}
+.highlight-orange {
+    --highlight-color: #d05f28;
+}
+.highlight-purple {
+    --highlight-color: #D866E1AA;
+}
+.highlight-red {
+    --highlight-color: #d02828;
+}
+
+.highlight {
+    text-shadow: .05em .06em var(--highlight-color);
+    display: inline !important;
+}
+
+.tags {
+    flex-direction: row;
+    justify-content: start !important;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    flex-wrap: wrap;
+}
+
+.tags .badge {
+    margin: .25em;
+}
+
+p, figcaption {
+    font-family: Calibri, serif;
+    color: var(--text-color) !important;
+    font-size: 1.25em !important;
+}
+
+.badge {
+    font-weight: 350 !important;
+    font-size: 1em;
+    background-color: var(--highlight-color) !important;
+}
+
+hr {
+    opacity: 1;
+    background-color: var(--text-color);
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+.progress {
+    background-color: var(--text-color);
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.progress-bar {
+    background-color: var(--highlight-color);
+    font-weight: bold;
+}
+
+thead {
+    font-weight: bold;
+}
+
+a {
+    color: var(--highlight-color);
+}
+
+.img_container {
+    align-items: center;
+    text-align: center;
+}
+
+.img_container img {
+    width: max(10em, 15vw);
+    object-fit: contain;
+    margin-left: .5em;
+    margin-right: .5em;
+}
+
+.carousel-item {
+    padding-top: 1em;
+}
+
+.container.carousel_text {
+    width: 100%;
+    max-width: 40em;
+    margin: 0;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+}
+
+.carousel-item img {
+    height: 30em;
+    width: auto;
+    margin-bottom: 1em;
+}
+
+div.padding {
+    height: 5em;
+}
+
+p.subtitle {
+    font-weight: lighter;
+    font-style: italic;
+    color: var(--highlight-color);
+    opacity: .75;
+    font-size: small !important;
+    text-align: center;
+}

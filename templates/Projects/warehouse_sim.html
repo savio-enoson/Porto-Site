@@ -1,0 +1,108 @@
+{% load static %}
+<style>
+.heading_img img {
+    height: auto;
+    width: 40vw;
+}
+img.project_img {
+    width: 25em;
+    max-width: 80vw;
+    height: auto;
+    margin-bottom: 3px
+}
+</style>
+
+<div class="row my-3">
+    <div class="col mb-3 mb-lg-0">
+        <div class="img_container heading_img px-3">
+            <img src="{% static 'Projects/WarehouseSim/homepage_1.jpg' %}" alt="homepage">
+            <p class="subtitle">UI Skeleton (currently in the works)</p>
+        </div>
+    </div>
+    <div class="col">
+        <h1>Warehouse Simulation App</h1>
+        <h5>With Bimodal Time Distribution and M/G/c Queue(s)</h5>
+        <div class="tags">
+            <span class="badge">{{ project.date|date:'Y' }}</span>
+            <span class="badge highlight-green">{{ project.topics }}</span>
+            <span class="badge highlight-orange">{{ project.type }}</span>
+            <span class="badge highlight-purple">{{ project.instance }}</span>
+        </div>
+        <br>
+        <h3>Problem&ensp;<i class="bi bi-pencil-fill"></i></h3>
+        <p>
+            A company wants to simulate different queueing systems at their warehouse, which regularly receives shipments from their suppliers. For this context, vehicles or shipments leaving the warehouse are beyond the scope of work.
+        </p>
+        
+        <a class="btn btn-outline-light" href="https://github.com/savio-enoson/WarehouseSim" target="_blank">
+            <i class="bi bi-github"></i>&ensp;Source Code</a>
+    </div>
+</div>
+
+<hr>
+
+<div class="row my-3">
+    <div class="col-sm-12 col-md-6 px-3">
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/WarehouseSim/plot.png' %}" alt="arrival graph">
+            <img class="project_img" src="{% static 'Projects/WarehouseSim/results.jpg' %}" alt="simulation results">
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <h3>Solution&ensp;<i class="bi bi-lightbulb-fill"></i></h3>
+
+        <p>
+            The problem itself is highly subjective towards randomness and the degree of complexity within the company’s warehouse management system. So, the solution (in code) must be as malleable as possible.
+        </p>
+        <p>
+            For this reason, I made a simulation in which the user can choose between 2 queue systems, either a centralized M/G/c queue (variable service rate) where trucks from the queue go into loading docks that match their load type as they become available, or a distributed queue, where each warehouse has a queue of its own, albeit with limited capacity.
+        </p>
+        <p>
+            Each queue can also choose whether or not to implement a priority queue system, which considers the type of load each vehicle is carrying as well as the time it has spent queueing. 
+        </p>
+        <p>
+            The aforementioned degree of complexity is also made to be dynamic. Firstly, the volume and time distribution of arrivals can be set to whatever the situation is like in real life. A bimodal distribution function is used to simulate the peak hours of arrival. Each vehicle has its own classes (determined by its size and type of load), which can affect its arrival rate (how many vehicles of a certain type are spawned) and its score for the priority queue system. 
+        </p>
+        <p>
+            At the end of the simulation, the parameters (settings the user chose for said simulation) are presented in clear metrics such as utilization, wait times, processing times, and overall time in the system. These results can also be compared to others to get a better understanding of what each change does to affect the system overall, both positively and negatively.
+        </p>
+        <p>
+            
+        </p>
+   </div>
+</div>
+
+<hr>
+
+<div class="row my-3">
+    <div class="col-sm-12 col-md-6 px-3">
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/WarehouseSim/classes.jpg' %}" alt="gameplay_2">
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <h3>Challenges&ensp;<i class="bi bi-bug-fill"></i></h3>
+        <p>
+            The problem given to me at first was very abstract, so I had to do a lot of research, looking at how successful queueing systems operate, industry best practices, as well as brainstorming ideas I can implement.
+        </p>
+        <p>
+            I also had no ‘code skeleton’ to work with, so what objects or variables needed to be made into classes, the Inheritance between them, etc I had to come up with as I go–often revising and adding relations where they fit.
+        </p>
+        
+        <br>
+        
+        <h3>Things I Learned&ensp;<i class="bi bi-bookmarks-fill"></i></h3>
+        <p>
+            Thankfully I approached this project with malleability in mind from the beginning. Every process is nicely segmented, the logic for each contained inside a tick(  ) method, which is then supported by other functions.
+        </p>
+        <p>
+            This made it substantially easier when I had to add more and more features to the project, and I often surprised myself when things I put to code worked straight away. I think this will be my standard practice going forward.
+        </p>
+   </div>
+</div>
+
+<hr>
+
+<h3 class="text-center"><i class="bi bi-tools"></i> Demo Coming Soon! <i class="bi bi-tools"></i></h3>

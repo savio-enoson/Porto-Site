@@ -1,0 +1,188 @@
+{% extends template %}
+{% load static %}
+
+{% block head %}
+<link href='{% static 'css/projects.css' %}' rel="stylesheet">
+<title>Projects | {{ app.page|default_if_none:"All" }}</title>
+{% endblock %}
+
+{% block body %}
+    {% if content %}
+        {{ content }}
+    {% else %}
+        <h1 class="highlight">A list of all my Projects</h1>
+
+        <br>
+        <h3>The website is a work in progess!</h3>
+        <h5>TODO: Individual Project Details</h5>
+        <a class="btn btn-outline-light mt-3 btn-sm" data-bs-toggle="collapse" href="#project_filters" role="button" id="f_toggle"
+           aria-expanded="false" aria-controls="project_filters" onclick="toggle_f_btn(this)">
+            Filters&ensp;<i class="bi-arrows-expand"></i>
+        </a>
+
+        <div class="row my-3 collapse collapsed" id="project_filters">
+            <div class="row filter_container">
+                <div class="col-3"> 
+                    <h5>Search</h5>
+                </div>
+                <div class="col-9">
+                    <form class="form search_container" action="">
+                        <div class="input-group">
+                            <span class="input-group-text bg-transparent text-light"><i class="bi-search"></i></span>
+                            <input type="text" id="f_search" class="form-control bg-transparent text-light"
+                                   placeholder="Project title or description...">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="row filter_container">
+                <div class="col-3">
+                    <h5>Year</h5>
+                </div>
+                <div class="col-9" id="f_year">
+                    {% for row in years %}
+                    <button class="btn badge" onclick="toggle_tag(this)">{{ row }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row filter_container">
+                <div class="col-3">
+                    <h5>Topic</h5>
+                </div>
+                <div class="col-9" id="f_topic">
+                    {% for row in topics %}
+                    <button class="btn badge highlight-green" onclick="toggle_tag(this)">{{ row }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row filter_container">
+                <div class="col-3">
+                    <h5 class="pt-3">Type</h5>
+                </div>
+                <div class="col-9" id="f_type">
+                    {% for row in types %}
+                    <button class="btn badge highlight-orange" onclick="toggle_tag(this)">{{ row }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="row filter_container">
+                <div class="col-3">
+                    <h5>Instance</h5>
+                </div>
+                <div class="col-9" id="f_instance">
+                    {% for row in instances %}
+                    <button class="btn badge highlight-purple" onclick="toggle_tag(this)">{{ row }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row my-3" id="projects">
+        {% for row in project %}
+            <div class="col-12 mb-5 project_row">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 my-3">
+                        <img class="project_thumbnail" src="{{ row.thumbnail.url }}" alt="{{ row.title }}">
+                    </div>
+                    <div class="col-sm-12 col-md-6 my-3">
+                        <figure class="figure">
+                            <h3>{{ row.title }}</h3>
+                            <figcaption class="figure-caption project_brief">{{ row.brief }}</figcaption>
+                            <div class="tags">
+                                <span class="badge">{{ row.date|date:'Y' }}</span>
+                                <span class="badge highlight-green">{{ row.topics }}</span>
+                                {% if row.type %}
+                                <span class="badge highlight-orange">{{ row.type }}</span>
+                                {% endif %}
+                                <span class="badge highlight-purple">{{ row.instance }}</span>
+                            </div>
+                            <button class="btn btn-outline-light btn-sm" onclick="get_page('projects', '{{ row.template_name }}')">
+                            &ensp;<i class="bi-search"></i>&ensp;Details&ensp;</button>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+<script>
+    var all_projects = $('#projects').html();
+    var tag_filters = []
+    var f_shown = false;
+
+    $(function () {
+        $('#f_search').on('keyup', function () {
+            f_search()
+        })
+    });
+    
+    function toggle_f_btn(button) {
+        f_shown = !f_shown;
+
+        if (f_shown) {
+            $(button).html('Filters&ensp;<i class="bi bi-arrows-collapse"></i>');
+        } else {
+            $(button).html('Filters&ensp;<i class="bi bi-arrows-expand"></i>');
+        }
+    }
+
+    function toggle_tag(tag) {
+        const tag_value = $(tag).html();
+
+        if (tag_filters.includes(tag_value)) {
+            tag_filters = tag_filters.filter(function (val) {
+                return val !== $(tag).html();
+            });
+            $(tag).removeClass('selected')
+        } else {
+            tag_filters.push($(tag).html())
+            $(tag).addClass('selected')
+        }
+        f_tags();
+    }
+
+    function f_tags() {
+        if (tag_filters.length === 0) {
+            $('#projects').html(all_projects);
+            return;
+        }
+        const f_queries = tag_filters.map(tag => tag.toLowerCase());
+
+        $('#projects .project_row').each(function () {
+            const tags = $(this).find('.tags').text().toLowerCase();
+            const show = f_queries.some(tag => tags.includes(tag));
+
+            if (show) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        })
+    }
+
+    function f_search() {
+        const query = $('#f_search').val().toLowerCase();
+        if (!query) {
+            $('#projects').html(all_projects);
+            return;
+        }
+
+        $('#projects .project_row').each(function () {
+            const title = $(this).find('h4').text().toLowerCase();
+            const caption = $(this).find('figcaption').text().toLowerCase();
+            if (title.includes(query) || caption.includes(query)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        })
+    }
+</script>
+{% endblock %}

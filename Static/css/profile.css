@@ -1,0 +1,140 @@
+.project_card.card {
+    background-color: transparent;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+
+    aspect-ratio: 16/9;
+    width: 100%;
+    max-width: 40em;
+    height: auto;
+    max-height: 30em;
+}
+
+.card img {
+    object-fit: contain;
+
+    height: 100%;
+    width: 100%;
+}
+
+.card_content {
+    position: absolute;
+    height: 0;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding-right: 2.5%;
+    padding-left: 2.5%;
+
+    box-sizing: border-box;
+    background-color: var(--secondary-color);
+
+    opacity: 0;
+    transition: 300ms;
+}
+
+.card_content figure h3 {
+    margin-top: 5%;
+    font-size: 90%;
+}
+
+.card_content figure figcaption {
+    font-size: 90% !important;
+}
+
+.card_content figure .badge {
+    font-size: 70%;
+}
+
+.card_content figure button {
+    font-size: 80%;
+    padding: 2.5px 5px 2.5px 5px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px var(--dark-color);
+}
+
+.card:hover .card_content {
+    opacity: 1;
+    height: 100%;
+}
+
+#skills_container, #projects_container {
+    display: flex;
+    justify-content: center;
+}
+
+#skills_container > div {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#skills_container > div, #projects_container > div {
+    padding-left: 2em;
+    padding-right: 2em;
+    text-align: center;
+}
+
+#skills_container .skill_image {
+    width: 6em;
+    height: auto;
+    object-fit: scale-down;
+    margin-bottom: 1em;
+}
+
+#edgeCanvas,
+#nodeCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.canvas_container {
+    height: 100%;
+    width: 100%;
+}
+
+canvas {
+    width: 100%;
+    height: min(80%, auto);
+
+    display: block;
+    margin: auto;
+
+    padding: 1em max(1em, 3vw) !important;
+}
+
+.typed-cursor{
+    font-size: 1.75em;
+    opacity: 1;
+}
+
+.typed-cursor.typed-cursor--blink {
+    animation: typedjsBlink 1.25s infinite !important;
+}
+
+.profile_heading h1 {
+    font-size: 6.5em;
+    font-weight: 900;
+    line-height: .8em;
+    letter-spacing: .05em;
+}
+
+.profile_heading figcaption {
+    font-size: 1.5em !important;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.subtext {
+    font-size: .75em;
+}

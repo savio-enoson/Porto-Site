@@ -1,0 +1,50 @@
+{% load static %}
+<link href='{% static 'css/header.css' %}' rel="stylesheet">
+
+<nav id="nav" class="d-flex justify-content-between align-items-center">
+    <div class="container-fluid mt-auto mb-0">
+        <div id="tab_pull"></div>
+        <a class="tab profile_selector {% if app.name == "profile" %} selected {% endif %}" href="#"
+           onclick="get_page('profile')" style="z-index: 3">Profile</a>
+        <a class="tab highlight-green projects_selector {% if app.name == "projects" %} selected {% endif %}" href="#"
+           onclick="get_page('projects')" style="z-index: 2">Projects</a>
+        <a class="tab highlight-orange writing_selector" href="#"
+           onclick="boilerplate()" style="z-index: 1">Writing</a>
+        <a class="tab highlight-purple contact_selector" href="#"
+           onclick="boilerplate()" style="z-index: 0">Contact</a>
+    </div>
+
+    <div class="navbar-brand d-none d-md-block">
+        <figure class="figure profile_fig">
+            <p><img class="site_icon py-1 px-1" src="{% static 'logos/site_logo_new.png' %}" alt="Site Icon">&emsp;Savio Enoson</p>
+            <figcaption class="figure-caption">
+                <a class="profile_link highlight-orange" href="https://www.instagram.com/savio_enoson/" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a class="profile_link highlight-green" href="mailto:savioenoson.dev@gmail.com" target="_blank"><i class="bi bi-envelope-fill"></i></a>
+                <a class="profile_link highlight-purple" href="https://github.com/savio-enoson" target="_blank"><i class="bi bi-github"></i></a>
+                <a class="profile_link" href="https://www.linkedin.com/in/savio-enoson" target="_blank"><i class="bi bi-linkedin"></i></a>
+            </figcaption>
+        </figure>
+    </div>
+</nav>
+
+<div class="offcanvas offcanvas-start sidebar" data-bs-scroll="true"
+     data-bs-backdrop="false" id="sidebar">
+    <div class="offcanvas-body sidebar_body mt-5">
+        <button class="bookmark-button profile_selector {% if app.name == "profile" %} selected {% endif %}"
+        onclick="get_page('profile')">
+            <i class="bi bi-person-circle"></i>
+        </button>
+        <button class="bookmark-button highlight-green projects_selector {% if app.name == "projects" %} selected {% endif %}"
+        onclick="get_page('projects')">
+            <i class="bi bi-code-square"></i>
+        </button>
+        <button class="bookmark-button highlight-orange writing_selector"
+        onclick="boilerplate()">
+            <i class="bi bi-pencil-square"></i>
+        </button>
+        <button class="bookmark-button highlight-purple"
+        onclick="boilerplate()">
+            <i class="bi bi-person-lines-fill contact_selector"></i>
+        </button>
+    </div>
+</div>

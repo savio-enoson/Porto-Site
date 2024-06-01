@@ -1,0 +1,423 @@
+{% load static %}
+<style>
+.heading_img img {
+    height: auto;
+    width: 80%;
+}
+
+img.project_img {
+    width: 25em;
+    max-width: 80vw;
+    height: auto;
+    margin-bottom: 3px
+}
+
+.carousel-inner {
+    height: fit-content;
+    min-height: 100vh;
+}
+
+.carousel_text {
+    max-width: 60em;
+}
+</style>
+
+<div class="row my-3">
+    <div class="col-sm-12 col-md-6 px-3">
+        <div class="img_container heading_img mb-3 mb-lg-0">
+            <img class="mb-0 mb-md-3" src="{% static 'Projects/ERP/inventory_new.jpg' %}" alt="inventory">
+            <img class="d-none d-lg-block" src="{% static 'Projects/ERP/sales_new.jpg' %}" alt="sales">
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 px-3">
+        <h1>ERP Software Suite</h1>
+        <h5>With Inventory, Sales, Purchasing, and BI modules</h5>
+        <div class="tags">
+            <span class="badge">{{ project.date|date:'Y' }}</span>
+            <span class="badge highlight-green">{{ project.topics }}</span>
+            <span class="badge highlight-orange">{{ project.type }}</span>
+            <span class="badge highlight-purple">{{ project.instance }}</span>
+        </div>
+        <br>
+        <p>
+            My family runs a retail / distribution business in Nusa Tenggara Timur, Indonesia. The traditional business model, which includes manual recordkeeping and hand-written receipts was getting messy, and we were having trouble keeping up with the scale of business.
+        </p>
+        <p>
+            As a result, a lot of potential business was lost, not to mention the time investment required to manage all the functional areas manually.
+        </p>
+        <p>
+            Another problem is that the workforce in rural Indonesia are largely unfamiliar with computers, so using ready-made software solutions present a heavy learning curve.
+        </p>
+        <p>
+            The interface had to be as simple and intuitive as possible–only the bare necessities.
+        </p>
+        
+        <a class="btn btn-outline-light" href="https://github.com/savio-enoson/ERP-Suite" target="_blank">
+            <i class="bi bi-github"></i>&ensp;Source Code</a>
+    </div>
+</div>
+
+<hr>
+
+<div class="row my-3">
+    <h3 class="text-center mb-3">Iteration 1: Smart Excel Book with VBA</h3>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/ERP/vba_UI.jpg' %}" alt="vba program">
+            <p class="subtitle">Improvised UI Using VBA Forms</p>
+        </div>
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/ERP/vba_database.jpg' %}" alt="vba program">
+            <p class="subtitle">Mock Database with Excel Table</p>
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <p>
+            Starting in 2021 with an Excel (Visual Basic for Applications) based program, I had slowly computerized functional areas of my family business.
+        </p>
+        <p>
+            It was initially just a simple Point of Sale (POS) interface, the barebones implementation of technology had, to my surprise, drastically improved queueing times at the store. 
+        </p>
+        <p>
+            Though functional, this approach had obvious flaws. Using excel meant that I had to make the built in methods function as a database. At this point I had only basic programming capabilties, so most of the business logic was flawed to say the least.
+        </p>
+        <p>
+            Online capabilities were also severely limited. I had some success implementing services like Dropbox and Google Drive to store the Excel file and update it when the user is idle, but it was unreliable to the point that I decided to seek another solution entirely.
+        </p>
+   </div>
+</div>
+
+<hr>
+
+<div class="row my-3">
+    <h3 class="text-center mb-3">Iteration 2: Django Web Application</h3>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/ERP/sales_old.jpg' %}" alt="vba program">
+            <p class="subtitle">POS Interface with Autocomplete Functionality</p>
+        </div>
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/ERP/inventory_old.jpg' %}" alt="vba program">
+            <p class="subtitle">Barebones Inventory Management using Datatables</p>
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <p>
+            As I learned more in university, I reworked the system into a web-based application, using business principles to create a Stock-keeping system, which included Inventory and Purchasing.
+        </p>
+        <p>
+            This allowed me to track Stock-Keeping Units (SKUs) more efficiently and not have to rely on shoddy information when asked about a certain product’s availability–a common issue in traditional businesses.
+        </p>
+        <p>
+            Looking back at this now, the UI feels too bright and exaggerated, not to mention the project is poorly structured, so whenever I went to make changes or add new features, I had to search through the mess for a good while before getting my bearings straight.
+        </p>
+        <p>
+            However flawed it is in hindsight, it was still a major improvement over the old iteration. It can now be accessed through mobile and desktop, and I can remotely control the database and help clean up any input errors.
+        </p>
+   </div>
+</div>
+
+<hr>
+
+<div class="row my-3">
+    <h3 class="text-center mb-3">Iteration 3: Remastered Web App</h3>
+    <div class="col-12 px-3">
+        <p>
+            Going into my 5th semester, I wanted to implement a Business Intelligence (BI) module and touch-up the User Interface to make it more responsive and easy to use. The BI module allows me to backtrack SKUs and find where mistakes in data input might have happened.
+        </p>
+        <p>
+            I also implemented stochastic calculations to help project demand and make more informed purchases. During this rework I also separated the project structure for better code readability, and more efficient data transfer.
+        </p>
+        <p>
+            This is the most recent and (for the time being) penultimate version of this project. Instead of an overview, I thought I would showcase the app's full list of features here while I'm at it.
+        </p>
+   </div>
+    
+    <div class="col-12 px-3">
+        <div class="container-fluid" onload="init_carousel('my_carousel')">
+            <div id="my_carousel" class="carousel slide my-3">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#my_carousel" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#my_carousel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#my_carousel" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#my_carousel" data-bs-slide-to="3"></button>
+                        <button type="button" data-bs-target="#my_carousel" data-bs-slide-to="4"></button>
+                        <button type="button" data-bs-target="#my_carousel" data-bs-slide-to="5"></button>
+                        <button type="button" data-bs-target="#my_carousel" data-bs-slide-to="6"></button>
+                        <button type="button" data-bs-target="#my_carousel" data-bs-slide-to="7"></button>
+                        <button type="button" data-bs-target="#my_carousel" data-bs-slide-to="8"></button>
+                    </div>
+                    
+                    <div class="carousel-inner">
+                        <div class="carousel-item text-center row active">
+                            <div class="col-12">
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_1.jpg' %}" alt="updated dashboard">
+                                    <p class="subtitle">New Dashboard Page</p>
+                                </div>
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_2.jpg' %}" alt="updated purchasing page">
+                                    <p class="subtitle">New Purchasing Index Page</p>
+                                </div>
+                            </div>
+                            <div class="col-12 carousel_text mx-auto">
+                                <h5>Cleaner, More Structured UI</h5>
+                                <p>
+                                    I made the UI cleaner both visually as well as in code. Each page has designated areas so the users can intuitively tell where to look for certain functions, and I added more badges and tooltips on hover to make it easier to learn.
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item text-center row">
+                            <div class="col-12">
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/db_old.png' %}" alt="old structure">
+                                    <p class="subtitle">Old Project Structure (a mess)</p>
+                                </div>
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/db_new.png' %}" alt="new structure">
+                                    <p class="subtitle">New Project Structure</p>
+                                </div>
+                            </div>
+                            <div class="col-12 carousel_text mx-auto">
+                                <h5>Remastered Project Backend</h5>
+                                <p>
+                                    A side effect of working on the project as I was learning the MVC system, the old project ended op not having a cohesive structure–everything was just part of the Inventory app (module). When remaking the project, I made sure to separate apps into functional areas and maintain the DRY (Don't Repeat Yourself) Principle.
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item text-center row">
+                            <div class="col-12">
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_3.jpg' %}" alt="cleaner modals">
+                                    <p class="subtitle">Updated Modals</p>
+                                </div>
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_4.jpg' %}" alt="direct links to foreign key">
+                                    <p class="subtitle">Direct Link to Foreign Keys</p>
+                                </div>
+                            </div>
+                            <div class="col-12 carousel_text mx-auto">
+                                <h5>"Quality of Life" Improvements</h5>
+                                <p>
+                                    Looking at what actions are most frequently done in order, I decided to create links between connected database entities. This way details about a transaction can be accessed with fewer clicks. This extends to other data as well (example given is for transactions) such as purchases and shipments.
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item text-center row">
+                            <div class="col-12">
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_5.jpg' %}" alt="inventory stock view">
+                                    <p class="subtitle">Stock View</p>
+                                </div>
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_6.jpg' %}" alt="inventory activity view">
+                                    <p class="subtitle">Activity View</p>
+                                </div>
+                            </div>
+                            <div class="col-12 carousel_text mx-auto">
+                                <h5>Inventory Module</h5>
+                                <p>
+                                    The expanded inventory module allows users to easily track items entering and leaving warehouses. I provided 2 views, Stock (overall item count) and Activity (movement and reference). Each view also has search and category (warehouse) filters to narrow down queries even further.
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item text-center row">
+                            <div class="col-12">
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_7.jpg' %}" alt="sales dashboard">
+                                    <p class="subtitle">New Sales Index Page</p>
+                                </div>
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/sales_new.jpg' %}" alt="new pos interface">
+                                    <p class="subtitle">Updated POS Interface</p>
+                                </div>
+                            </div>
+                            <div class="col-12 carousel_text mx-auto">
+                                <h5>Sales Module</h5>
+                                <p>
+                                    As with the Inventory and Dashboard, the Sales homepage also had a facelift. I simplified the payment and collection statuses into 4 categories. The POS system also had a major rework, now using a local database and RegEx for better efficiency.
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item text-center row">
+                            <div class="col-12">
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_9.jpg' %}" alt="purchasing dashboard">
+                                    <p class="subtitle">New Purchasing Index Page</p>
+                                </div>
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_10.jpg' %}" alt="updated input page">
+                                    <p class="subtitle">Updated Input Interface</p>
+                                </div>
+                            </div>
+                            <div class="col-12 carousel_text mx-auto">
+                                <h5>Purchasing Module</h5>
+                                <p>
+                                    The Purchasing and Sales module are similarly structured, so the same approach applies to both, albeit with a few changes here and there. When inputting Shipments (Child of Purchase Orders), the autocomplete functionality uses the same RegEx system but only with items in that PO.
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item text-center row">
+                            <div class="col-12">
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_11.jpg' %}" alt="receiving items">
+                                    <p class="subtitle">Receiving Items</p>
+                                </div>
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_12.jpg' %}" alt="updated input page">
+                                    <p class="subtitle">Offloading Items</p>
+                                </div>
+                            </div>
+                            <div class="col-12 carousel_text mx-auto">
+                                <h5>SKU Management</h5>
+                                <p>
+                                    SKUs use a stack system, where an item might be stored in multiple warehouses. For this reason when receiving and offloading items the admin needs to choose the origin as well. Options are provided dynamically by querying stacks, in this way the admin can also see how many items are in a stack before deducting from it.
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item text-center row">
+                            <div class="col-12">
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_13.jpg' %}" alt="receiving items">
+                                    <p class="subtitle">Inventory Recap</p>
+                                </div>
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_8.jpg' %}" alt="updated input page">
+                                    <p class="subtitle">Bill Automation</p>
+                                </div>
+                            </div>
+                            <div class="col-12 carousel_text mx-auto">
+                                <h5>Recap Automation</h5>
+                                <p>
+                                    By selecting a date or a time range, several kinds of recaps can be made. These use aggregate queries to save runtime. As with other database entries, the user interface is linked with various foreign keys for ease of access. There recaps can also be printed physically.
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-item text-center row">
+                            <div class="col-12">
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_14.jpg' %}" alt="receiving items">
+                                    <p class="subtitle">Admin Dashboard</p>
+                                </div>
+                                <div class="img_container">
+                                    <img class="project_img" src="{% static 'Projects/ERP/carousel_15.jpg' %}" alt="updated input page">
+                                    <p class="subtitle">Session Tracking</p>
+                                </div>
+                            </div>
+                            <div class="col-12 carousel_text mx-auto">
+                                <h5>Admin Page</h5>
+                                <p>
+                                    The admin page provides a clear list of tasks using aggregate queries like before. Things such as pending Transactions, items that might need restocking, etc. I also implemented a session system to track cash flow–this also integrates with the Sales module to identify any input errors.
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="carousel-control-prev" type="button" data-bs-target="#my_carousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#my_carousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<h3 class="text-center">Challenges&ensp;<i class="bi bi-bug-fill"></i></h3>
+<div class="row my-3">
+    <div class="col-sm-12 col-md-6 px-3">
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/ERP/challenges_2.jpg' %}" alt="aggregate queries">
+            <p class="subtitle">Aggregate Query with Time Range</p>
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <p>
+            I realized when working on the VBA application that certain tasks such as aggregation and deletion are annoying to implement without the use of a database. This, and cross-platform accessibility was my main reason for transitioning into the web application.
+        </p>  
+        <p>
+            During the early stages of building the web application, I had trouble with runtime. Queries get bigger and bigger as the database grows–I had to adjust the queries to make them more efficient.
+        </p>
+   </div>
+</div>
+<div class="row my-3">
+    <div class="col-sm-12 col-md-6 px-3">
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/ERP/challenges_1.jpg' %}" alt="printer controller script">
+            <p class="subtitle">Printer Controller Script</p>
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <p>
+            Setting up the printers for the POS system was also a challenge. I had to write custom Bash scripts and install miniature computers to act as mediators between the printers and my web application.
+        </p>
+        <p>
+            This included retrieving the data (SSH Tunneling), pre-processing, and then encoding it for the specific kind of printer–for larger transactions we used a dot-matrix printer, which had a different script compared to the thermal receipt printer.
+        </p>
+   </div>
+</div>
+<div class="row my-3">
+    <div class="col-sm-12 col-md-6 px-3">
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/ERP/challenges_3.jpg' %}" alt="front end">
+            <p class="subtitle">Front-End (Js) Logic</p>
+            <img class="project_img" src="{% static 'Projects/ERP/challenges_4.jpg' %}" alt="back end">
+            <p class="subtitle">Back-End (Python) Logic</p>
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <p>
+            To increase the efficiency of my web application, I thought it would be a good exercise to replicate the design principles of React and Flutter–only updating parts of the page that needed to be updated.
+        </p>
+        <p>
+            This required an extensive rework, and to make direct links work I had to code in a bunch of back-end logic to make pages able to render fully or partially according to the use case.
+        </p>
+        
+        <h3 class="text-center text-md-start mt-5">Things I Learned&ensp;<i class="bi bi-bookmarks-fill"></i></h3>
+        <p>
+            This is a long, ongoing project—so to say that this project encompasses the bulk of my skill set wouldn’t be an overstatement.
+        </p>  
+        <p>
+            The highlights for me have been translating real-world business processes into the program, while identifying and creating solutions only possible through IT.
+        </p>
+        <p>
+            I also learned a great deal about database management and some hardware stuff while working on the POS system.
+        </p>
+        <p>
+            I reckon I also became better at management through implementing the web app in the field, teaching family and employees alike, while also taking feedback and revising along the way.
+        </p>
+   </div>
+</div>
+
+<hr>
+
+<h3 class="text-center"><i class="bi bi-tools"></i> Demo Coming Soon! <i class="bi bi-tools"></i></h3>

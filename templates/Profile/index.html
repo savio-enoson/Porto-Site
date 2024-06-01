@@ -1,0 +1,400 @@
+{% extends template %}
+{% load static %}
+
+{% block head %}
+<title>Savio's Portfolio Website</title>
+<link href='{% static 'css/profile.css' %}' rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="row mb-5">
+    <div class="col-md-12 col-lg-6" style="z-index: -1">
+        <div class="canvas_container position-relative">
+            <canvas style="z-index: 1" id="nodeCanvas" width="1000" height="800"></canvas>
+            <canvas style="z-index: -1" id="edgeCanvas" width="1000" height="800"></canvas>
+        </div>
+    </div>
+    <div id="intro_col" class="col-md-12 col-lg-6" style="z-index: 10">
+        <figure class="figure profile_heading mb-3">
+            <h1>SAVIO ENOSON</h1>
+            <figcaption class="figure-caption">Writer | Full Stack Developer</figcaption>
+        </figure>
+
+        <h2 id="welcome_text" class="highlight d-inline text-nowrap"></h2>
+        <p>
+            I am a third-year undergrad student currently studying Business Information Systems at Petra Christian University.
+        </p>
+        <p>
+            I do full-stack web development, usually using the Django framework. Anything from basic portfolio websites to fully integrated ERP Software for Small to Medium sized enterprises.
+        </p>
+        <p>
+            Oh, also I write essays for fun sometimes.
+        </p>
+        <button onclick="scroll_to('projects_container')"
+                class="btn btn-outline-light btn-sm mt-3">
+            Check out some of my stuff below&ensp;<i class="bi-arrow-down"></i>
+        </button>
+    </div>
+</div>
+<hr>
+<div class="row card_row my-3" id="projects_container">
+    <h1 class="highlight text-center" id="projects_heading">My Projects</h1>
+    <h3 class="text-center">The website is a work in progess!</h3>
+    <h5 class="text-center">TODO: Individual Project Details</h5>
+{% for row in projects %}
+    <div class="col-sm-12 col-md-6 col-xl-4 py-3">
+        <div class="card project_card">
+            <img src="{{ row.thumbnail.url }}" alt="{{ row.title }}">
+            <div class="card_content">
+                <figure class="figure">
+                    <h3>{{ row.title }}</h3>
+                    <figcaption class="figure-caption">{{ row.brief }}</figcaption>
+                    <div class="tags d-none d-md-block">
+                        <span class="badge">{{ row.date|date:'Y' }}</span>
+                        <span class="badge highlight-green">{{ row.topics }}</span>
+                        {% if row.type %}
+                        <span class="badge highlight-orange">{{ row.type }}</span>
+                        {% endif %}
+                        <span class="badge highlight-purple">{{ row.instance }}</span>
+                    </div>
+                    <button class="btn btn-outline-light project_button mt-1 mt-md-0"
+                    onclick="get_page('projects', '{{ row.template_name }}')">
+                    &ensp;<i class="bi-search"></i>&ensp;Details&ensp;</button>
+                </figure>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+    <div class="col-sm-12 col-md-6 col-xl-4 py-3">
+        <button class="btn btn-outline-light w-100 h-100" onclick="get_page('projects')">
+            &ensp;More Projects&ensp;<i class="bi-three-dots"></i>&ensp;</button>
+    </div>
+</div>
+<hr>
+<div class="row card_row my-3" id="skills_container">
+    <h1 class="highlight text-center">What I'm Learning</h1>
+    <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+        <img class="skill_image" src="{% static 'logos/coding.png' %}" alt="Web Development">
+        <figure class="figure">
+            <h3>General Programming</h3>
+            <figcaption class="figure-caption">Fundamentals, Algorithms, OOP, and Data Structures in Python, JS, Java, and VBA. Various data processing and Machine Learning libraries like Pandas and Scikit.</figcaption>
+        </figure>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+        <img class="skill_image" src="{% static 'logos/web_dev_concat.png' %}" alt="Web Development">
+        <figure class="figure">
+            <h3>Web Development</h3>
+            <figcaption class="figure-caption">HTML, CSS, Javascript. Libraries like Bootstrap and jQuery, as well as functional ones such as Datatables, html2pdf, etc. Intermediate knowlege of animations and styling.</figcaption>
+        </figure>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+        <img class="skill_image" src="{% static 'logos/database-svgrepo-com.svg' %}" alt="Database Management">
+        <figure class="figure">
+            <h3>Database Management</h3>
+            <figcaption class="figure-caption">Proficient with DDL and DML. Intermediate experience with more advanced Database functions like Cursors, Triggers, Packages, Exceptions, etc.</figcaption>
+        </figure>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+        <img class="skill_image" src="{% static 'logos/djangoproject-svgrepo-com.svg' %}" alt="Web Development">
+        <figure class="figure">
+            <h3>Django Framework</h3>
+            <figcaption class="figure-caption">Fundamentals, Models, QuerySets, Signals, and Requests/Views Management. Familiar with using plugins such as CRON Jobs and Django REST API.</figcaption>
+        </figure>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+        <img class="skill_image" src="{% static 'logos/gnu-linux-svgrepo-com.svg' %}" alt="Web Development">
+        <figure class="figure">
+            <h4>Linux / BASH</h4>
+            <figcaption class="figure-caption">Intermediate experience with more advanced applications such as Scripts, Server Administration, SSH, Services etc.</figcaption>
+        </figure>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+        <img class="skill_image" src="{% static 'logos/office-1-logo-svgrepo-com.svg' %}" alt="Web Development">
+        <figure class="figure">
+            <h3>MS / Google Office Suite</h3>
+            <figcaption class="figure-caption">Formatting, Extensions, and creating custom Macros using both VBA and Google Apps Script.</figcaption>
+        </figure>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4 py-3">
+        <img class="skill_image" src="{% static 'logos/globe-with-meridians-svgrepo-com.svg' %}" alt="Web Development">
+        <figure class="figure">
+            <h3>Language</h3>
+            <figcaption class="figure-caption">Professional Working Proficiency in English and Bahasa Indonesia.
+                Received an 8.0 in IELTS Academic (2020) and 155 Overall on the Duolingo English Test (2024).</figcaption>
+        </figure>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    var edgeCanvas;
+    var nodeCanvas;
+    var edgeContext;
+    var nodeContext;
+    var nodes = []
+    var edges = []
+    var node_r = 18.5;
+    var colors = ['#1E90FFFF', '#208028', '#D05F28FF', '#D866E1AA']
+    var linecolor = 'whitesmoke';
+    var stroke_size = 1;
+    var canvas_active = false;
+
+    $(function () {
+        if (window.innerWidth < 992)  {
+            if (window.innerWidth <= 576) {
+                $('.project_card.card').addClass('w-100');
+            }
+
+            linecolor = 'gray'
+            stroke_size = 3;
+            $('#edgeCanvas, #nodeCanvas').css({
+                'left': '30vw',
+                'top': '-3vh',
+                'opacity': '.75',
+                'height': '48vh',
+                'width': 'auto'
+            });
+        }
+        
+        if (window.innerWidth >= 1600) {
+            const right_col = $('#intro_col');
+            const pad_l = right_col.outerWidth() * 0.25;
+            
+            $('#edgeCanvas, #nodeCanvas').css({
+                'height': (right_col.outerHeight() + 50) + 'px',
+                'width': 'auto',
+                'left': (pad_l - 50) + 'px'
+            });
+        }
+
+        var welcome_text = new Typed('#welcome_text', {
+            strings: ['Hello World!', 'Welcome to my page!'],
+            typeSpeed: 50,
+        });
+
+        start_node_animation()
+        setTimeout(function () {
+            if (!canvas_active) {
+                start_node_animation()
+            }
+        }, 2000)
+    });
+
+    function start_node_animation() {
+        if (in_animation) {
+            canvas_active = false;
+            return;
+        }
+
+        try {
+            canvas_active = true;
+            edgeCanvas = document.getElementById('edgeCanvas');
+            nodeCanvas = document.getElementById('nodeCanvas');
+            edgeContext = edgeCanvas.getContext('2d');
+            nodeContext = nodeCanvas.getContext('2d');
+            nodes = []
+            edges = []
+        } catch (e) {
+            return;
+        }
+
+        const top_l = [20, 20, node_r]
+        const bot_r = [nodeCanvas.width - 20, nodeCanvas.height - 20, node_r]
+
+        nodes.push({ x: top_l[0], y: top_l[1], radius: top_l[2] });
+        nodes.push({ x: bot_r[0], y: bot_r[1], radius: bot_r[2] });
+        Array.from({ length: 20 }, () => drawRandomNode());
+
+        edges = primMST(nodes)
+
+        nodes.forEach((node) => {
+            drawCircle(node.x, node.y, node_r);
+        })
+
+        setTimeout(() => {
+            drawGraphSequentially(0).then(() => {
+                setTimeout(() => {
+                    clearCircles();
+                    clearLines();
+                    setTimeout(() => {
+                        start_node_animation();
+                    }, 500);
+                }, 500);
+            });
+        }, 500);
+    }
+
+    function clearCircles() {
+        const animationSpeed = 0.5;
+        const color = getRandomColor();
+        let currentRadius = node_r;
+
+        function clear() {
+            nodeContext.clearRect(0, 0, nodeCanvas.width, nodeCanvas.height);
+
+            nodes.forEach((node) => {
+                nodeContext.beginPath();
+                nodeContext.arc(node.x, node.y, currentRadius, 0, 2 * Math.PI);
+                nodeContext.fillStyle = color;
+                nodeContext.fill();
+            });
+
+            currentRadius -= animationSpeed;
+            if (currentRadius > 0) {
+                requestAnimationFrame(clear);
+            }
+        }
+
+        clear();
+    }
+
+    function clearLines() {
+        const animationSpeed = 0.02;
+        let currentOpacity = 1;
+
+        function clear() {
+            edgeContext.clearRect(0, 0, edgeCanvas.width, edgeCanvas.height);
+
+            edges.forEach((edge) => {
+                edgeContext.beginPath();
+                edgeContext.moveTo(edge.start.x, edge.start.y);
+                edgeContext.lineTo(edge.end.x, edge.end.y);
+                edgeContext.strokeStyle = linecolor;
+                edgeContext.lineWidth = stroke_size;
+                edgeContext.globalAlpha = currentOpacity;
+                edgeContext.stroke();
+            });
+
+            currentOpacity -= animationSpeed;
+            if (currentOpacity > 0) {
+                requestAnimationFrame(clear);
+            }
+        }
+
+        clear();
+    }
+
+    function drawGraphSequentially(index) {
+        return new Promise((resolve) => {
+            if (index < edges.length) {
+                const obj = edges[index];
+
+                animateLine(obj.start, obj.end, function () {
+                    drawGraphSequentially(index + 1).then(resolve);
+                });
+            } else {
+                resolve(); // Resolve the promise when the animation is complete
+            }
+        });
+    }
+
+    function animateLine(start, end, callback) {
+        var currentX = start.x;
+        var currentY = start.y;
+        var speed = 5;
+
+        function draw() {
+            edgeContext.beginPath();
+            edgeContext.moveTo(start.x, start.y);
+            edgeContext.lineTo(currentX, currentY);
+            edgeContext.strokeStyle = linecolor;
+            edgeContext.lineWidth = stroke_size;
+            edgeContext.globalAlpha = 1;
+            edgeContext.stroke();
+
+            currentX += (end.x - start.x) / 100 * speed;
+            currentY += (end.y - start.y) / 100 * speed;
+
+            if (calculateDistance({ x: currentX, y: currentY }, end) > .5) {
+                requestAnimationFrame(draw);
+            } else {
+                if (callback) {
+                    callback();
+                }
+            }
+        }
+        draw();
+    }
+
+    function drawCircle(x, y, finalRadius) {
+        const animationSpeed = 0.5;
+        const color = getRandomColor();
+        let currentRadius = 0;
+
+        function draw() {
+            nodeContext.beginPath();
+            nodeContext.arc(x, y, currentRadius, 0, 2 * Math.PI);
+            nodeContext.fillStyle = color;
+            nodeContext.fill();
+            currentRadius += animationSpeed;
+            if (currentRadius < finalRadius) {
+                requestAnimationFrame(draw);
+            }
+        }
+        draw();
+    }
+
+    function getRandomColor() {
+        return colors[Math.floor(Math.random() * colors.length)];
+    }
+
+    function drawRandomNode() {
+        var newNodeX, newNodeY;
+
+        do {
+            newNodeX = Math.random() * (nodeCanvas.width - 2 * node_r) + node_r;
+            newNodeY = Math.random() * (nodeCanvas.height - 2 * node_r) + node_r;
+        } while (isTooCloseToOtherNodes(newNodeX, newNodeY, node_r));
+
+        nodes.push({ x: newNodeX, y: newNodeY, radius: node_r });
+    }
+
+    function isTooCloseToOtherNodes(x, y, radius) {
+        for (var i = 0; i < nodes.length; i++) {
+            var distance = Math.sqrt(Math.pow(x - nodes[i].x, 2) + Math.pow(y - nodes[i].y, 2));
+            if (distance < 100 + radius + nodes[i].radius) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function primMST(nodes) {
+        var mstEdges = [];
+        var visitedNodes = new Set();
+        var startNode = nodes[0];
+
+        visitedNodes.add(startNode);
+
+        while (visitedNodes.size < nodes.length) {
+            var minEdge = findMinEdge(visitedNodes, nodes);
+            visitedNodes.add(minEdge.end);
+            mstEdges.push(minEdge);
+        }
+
+        return mstEdges;
+    }
+
+    function findMinEdge(visitedNodes, nodes) {
+        var minEdge = { weight: Infinity };
+
+        visitedNodes.forEach(function (visitedNode) {
+            nodes.forEach(function (node) {
+                if (!visitedNodes.has(node)) {
+                    var distance = calculateDistance(visitedNode, node);
+                    if (distance < minEdge.weight) {
+                        minEdge = { start: visitedNode, end: node, weight: distance };
+                    }
+                }
+            });
+        });
+
+        return minEdge;
+    }
+
+    function calculateDistance(node1, node2) {
+        return Math.sqrt(Math.pow(node1.x - node2.x, 2) + Math.pow(node1.y - node2.y, 2));
+    }
+</script>
+{% endblock %}

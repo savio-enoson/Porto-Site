@@ -1,0 +1,276 @@
+{% load static %}
+{% load i18n %}
+{% language 'en' %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <!--META TAGS-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/png" href="{% static 'logos/site_logo_new.png' %}">
+
+    <!--JQUERY-->
+    <script src="{% static 'jQuery/code.jquery.com_jquery-3.7.0.js' %}"></script>
+
+    <!--BOOTSTRAP-->
+    <link href='{% static 'bootstrap/css/bootstrap.css' %}' rel="stylesheet">
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+
+    <!--BOOTSTRAP ICONS-->
+    <link href='{% static 'bootstrap icons/font/bootstrap-icons.css' %}' rel="stylesheet">
+
+    <!--JQUERY UI-->
+    <link href='{% static 'jQueryUI/jquery-ui.css' %}' rel="stylesheet">
+    <script src="{% static 'jQueryUI/jquery-ui.js' %}"></script>
+
+    <!--LOCAL STYLES.CSS-->
+    <link href='{% static 'css/general.css' %}' rel="stylesheet">
+
+    <!--PAGE SPECIFIC CSS-->
+    {% block head %} {% endblock %}
+</head>
+
+<body>
+    {% include "General/header.html" %}
+    <div class="container-fluid py-5 mx-auto" id="root">
+    {% block body %} {% endblock %}
+    {% block script %} {% endblock %}
+    </div>
+    <div class="container-fluid py-5 px-5 mx-auto" id="root_temp">
+    </div>
+</body>
+
+<div class="modal fade" id="modal_template">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+<script>
+    let root = $('#root');
+    let root_temp = $('#root_temp');
+    const sidebar = new bootstrap.Offcanvas('#sidebar');
+    const a_speed = 300;
+    const tab = $('#tab_pull');
+
+    let current_z = 4;
+    let current_f = null;
+    let toggled_g = false;
+    let current_p = "{{ app.name }}/{{ app.page }}";
+    let in_animation = false;
+
+    const pages = ['profile', 'projects', 'writing', 'contact']
+    let loaded = {}
+
+    $(function () {
+        init_hover()
+        init_scroll()
+
+        loaded[current_p] = {
+            title: $('title').html(),
+            content: root.html()
+        }
+    });
+
+    function boilerplate() {
+        alert("Coming Soon!")
+    }
+
+    function get_page(page, name = null) {
+        const pages = {
+            'profile': "{% url 'Profile:get_profile' %}",
+            'projects': "{% url 'Profile:get_project' %}"
+        }
+        const page_id = `${page}/${name}`;
+        let url = pages[`${page}`];
+
+        if (current_p === page_id) {return;}
+
+        if (page_id in loaded) {
+            root_temp.html(loaded[page_id].content);
+            current_p = page_id;
+
+            const title = loaded[page_id].title;
+            $('title').html(title)
+
+            url = (name)? pages[`${page}`] + name : pages[`${page}`];
+            window.history.pushState({Title: title, Url: url}, title, url);
+        }
+        else {
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: {
+                    name:name, as_json: true
+                },
+                success: function (response) {
+                    root_temp.html(response.content);
+                    current_p = page_id;
+
+                    loaded[page_id] = {
+                        title: response.title,
+                        content: response.content
+                    };
+
+                    $('title').html(response.title)
+
+                    url = (name)? pages[`${page}`] + name : pages[`${page}`];
+                    window.history.pushState({Title: response.title, Url: url}, response.title, url);
+                },
+            })
+        }
+
+        in_animation = true
+        hide_sidebar()
+
+        dispose_page(page, function () {
+            setTimeout(() => {
+                $(`.tab:not(.selected)`).animate({ left: '0' }, { duration: a_speed * 5, queue: false });
+                root.html('');
+                root.css('left', '0');
+                root.toggle()
+
+                $(`.tab.${page}_selector`).addClass('selected');
+                $(`.bookmark-button.${page}_selector`).addClass('selected');
+                current_f = null;
+
+                swap_roots();
+                init_hover();
+
+                in_animation = false;
+            }, 1000);
+        });
+    }
+
+    function dispose_page(page, callback) {
+        if (current_f) {
+            $('.tab').off('mouseenter mouseleave');
+            current_f.animate({ top: '0px' }, { duration: a_speed, queue: false });
+            tab.animate({ top: '5em'}, { duration: a_speed, queue: false});
+        }
+
+        scroll_to('nav', function() {
+            root_temp.toggle()
+            root.animate({ left: '-=200vw' }, { duration: a_speed*2, queue: false });
+            $(`.tab:not(.${page}_selector)`).animate({ left: '-=100vw' }, { duration: a_speed*5, queue: false });
+            setTimeout(() => {
+                $('.tab.selected').removeClass('selected');
+                $('.bookmark-button.selected').removeClass('selected');
+            },a_speed*2);
+
+            callback();
+        })
+    }
+
+    function swap_roots() {
+        root.attr('id', 'root_temp');
+        root_temp.attr('id', 'root');
+        root = $('#root');
+        root_temp = $('#root_temp');
+    }
+
+    function init_hover() {
+        $('.tab').off('mouseenter mouseleave');
+        $('.tab:not(.selected)').hover(
+        function(){
+            current_f = $(this);
+            tab.css('z-index', $(this).css('z-index'));
+
+            $(this).animate({ top: '-.5em'}, { duration: a_speed, queue: false });
+            tab.animate({ top: '4.25em'}, { duration: a_speed, queue: false });
+        }
+        ,function(){
+            const my_tab = $(this);
+            current_f = my_tab;
+
+            //tab.css('box-shadow', 'none')
+            $(this).animate({ top: '0px' }, { duration: a_speed, queue: false });
+            tab.animate({ top: '5em'}, { duration: a_speed, queue: false, complete: function () {
+                if (my_tab === current_f) {
+                    tab.css('z-index', current_z);
+                    tab.css('box-shadow', '0px -3px 15px black')
+                }
+            }});
+        });
+    }
+
+    function scroll_to(id, callback) {
+        $('html, body').animate({
+            scrollTop: $(`#${id}`).offset().top - 50
+        }, 0);
+
+        if (window.scrollY > 50) {
+            setTimeout(callback, 500)
+        } else {
+            callback();
+        }
+    }
+
+    function show_sidebar() {
+        root.css({
+            'left': '3em',
+            'right': '0',
+            'width': 'calc(100% - 3em)',
+        });
+
+        if (!toggled_g) {
+            $('#edgeCanvas, #nodeCanvas').animate({ left: '-=1.5em' }, { duration: a_speed, queue: false });
+            toggled_g = true;
+        }
+
+        sidebar.show()
+    }
+
+    function hide_sidebar() {
+        sidebar.hide()
+
+        root.css({
+            'left': '0',
+            'width': '100%',
+        });
+
+        if (toggled_g) {
+            $('#edgeCanvas, #nodeCanvas').animate({ left: '+=1.5em' }, { duration: a_speed, queue: false });
+            toggled_g = false;
+        }
+    }
+
+    function init_scroll() {
+        $(window).scroll(function () {
+            const scrollY = $(this).scrollTop();
+
+            if (!in_animation) {
+                if (scrollY > 100) {
+                    show_sidebar()
+                } else {
+                    hide_sidebar()
+                }
+            }
+        });
+    }
+    
+    function init_carousel(id) {
+        const myCarouselElement = document.querySelector(`#${id}`);
+
+        const carousel = new bootstrap.Carousel(myCarouselElement, {
+          interval: 1000,
+          touch: true
+        })
+    }
+</script>
+
+{% endlanguage %}

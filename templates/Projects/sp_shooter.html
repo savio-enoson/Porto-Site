@@ -1,0 +1,92 @@
+{% load static %}
+<style>
+.heading_img img {
+    height: 75vh;
+    width: auto;
+}
+</style>
+
+<div class="row my-3">
+    <div class="col mb-3 mb-lg-0">
+        <div class="img_container heading_img px-3
+        d-flex justify-content-between flex-column flex-lg-row">
+            <img src="{% static 'Projects/Space Shooter/home_1.jpg' %}" alt="homepage_1">
+            <img class="d-none d-lg-block" src="{% static 'Projects/Space Shooter/home_2.jpg' %}" alt="homepage_2">
+        </div>
+    </div>
+    <div class="col">
+        <h1>Space Shooter Game</h1>
+        <h3>With LibGDX and OOP Concepts</h3>
+        <div class="tags">
+            <span class="badge">{{ project.date|date:'Y' }}</span>
+            <span class="badge highlight-green">{{ project.topics }}</span>
+            <span class="badge highlight-purple">{{ project.instance }}</span>
+        </div>
+        <br>
+        <h3>Problem&ensp;<i class="bi bi-pencil-fill"></i></h3>
+        <p>
+            This was the final project for my object oriented programming course. We were tasked with creating a game which implements OOP concepts using LibGDX–a Java library for creating games on multiple platforms. There were multiple types of games to choose from, and I ended up picking a Space Shooter type game.
+        </p>
+        
+        <a class="btn btn-outline-light" href="https://github.com/savio-enoson/badSpaceShooter" target="_blank"><i class="bi bi-github"></i>&ensp;Source Code</a>
+        <a class="btn btn-outline-light" href="https://drive.google.com/file/d/1toavGxT6C01NUvgvwcNpANo9TI2tyvWj/view?usp=sharing" target="_blank"><i class="bi bi-play-btn-fill"></i>&ensp;Gameplay</a>
+    </div>
+</div>
+
+<hr>
+
+<div class="row my-3">
+    <div class="col-sm-12 col-md-6 px-3">
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/Space Shooter/gameplay_1.jpg' %}" alt="gameplay_1">
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <h3>Solution&ensp;<i class="bi bi-lightbulb-fill"></i></h3>
+
+        <p>
+            I made 3 main or superclasses for this game, Ship, Weapon and Floater. Ship encompasses the PlayerShip and EnemyShip, which is further divided into 2 subclasses, NormalEnemy and HardEnemy (a more sporadic movement pattern). Floaters are objects that travel down through the screen.
+        </p>
+        <p>
+            There are 2 child classes, Heal and Asteroid. Heal does as expected, and Asteroids make the player ship take damage when hit. Next I implemented 3 different weapon types to switch up the playstyles. Pistol, Shotgun, and Laser. 
+        </p>
+        <p>
+            These use the Weapon Interface to connect with the Ship dynamically. Enemies spawn with pistols by default, but as the game goes on Polymorphism is used to cast the weapon to either Shotgun or Laser to increase difficulty. 
+        </p>
+        <p>
+           The usage of Inheritance allows me to efficiently loop through entities in the game and implement the game logic in a more cohesive manner (logic for each type is within each subclass’s method). I also implemented a leaderboard system which uses serialization–and added a leaderboard page for players to compare their scores. 
+        </p>
+   </div>
+</div>
+
+<hr>
+
+<div class="row my-3">
+    <div class="col-sm-12 col-md-6 px-3">
+        <div class="img_container mb-3 mb-lg-0">
+            <img class="project_img" src="{% static 'Projects/Space Shooter/gameplay_2.jpg' %}" alt="gameplay_2">
+        </div>
+    </div>
+    
+    <div class="col-sm-12 col-md-6 px-3">
+        <h3>Challenges&ensp;<i class="bi bi-bug-fill"></i></h3>
+        <p>
+            Learning the LibGDX library was made a bit more complicated by the lack of community resources, I guess the engine is not as popular as other ones like Unity.
+        </p>
+        <p>
+            I also had trouble finding places to implement OOP concepts like Interfaces and Polymorphism, although they eventually fell into place with the Weapons system.
+        </p>
+        
+        <br>
+        
+        <h3>Things I Learned&ensp;<i class="bi bi-bookmarks-fill"></i></h3>
+        <p>
+            This hands-on experience really helped me internalize the concepts in OOP. It was also very satisfying to come up with solutions that use everything I had learned in the course in a way that did not feel forced.
+        </p>
+   </div>
+</div>
+
+<hr>
+
+<h3 class="text-center"><i class="bi bi-tools"></i> Demo Coming Soon! <i class="bi bi-tools"></i></h3>
